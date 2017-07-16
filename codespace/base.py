@@ -34,12 +34,21 @@ class SelectionWindow(Gtk.Window):
 
         label = Gtk.Label()
         label.set_markup("<big>A fancy label</big>")
-        stack.add_titled(label, "label", "Recent Projects")
+        stack.add_titled(label, "label", "Open")
 
         stack_switcher = Gtk.StackSwitcher()
         stack_switcher.set_stack(stack)
-        vbox.pack_start(stack_switcher, False, True, 0)
+
+        sidebar = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        vbox.pack_start(sidebar, False, True, 0)
         vbox.pack_start(stack, True, True, 0)
+
+        sidebar.pack_start(stack_switcher, False, False, 0)
+
+        information = Gtk.Label()
+        information.set_markup("Hours Operating: ???\nLast Project: ???\nAvalible Ram: ???\nAvalible cpu: ???")
+        sidebar.pack_end(information, True, True, 0)
+
 
         self.connect("destroy", Gtk.main_quit)
         self.show_all()
